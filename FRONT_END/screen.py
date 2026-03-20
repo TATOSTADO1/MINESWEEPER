@@ -159,7 +159,7 @@ class Screen:
         elif value == 0:
             button.config(text="", relief=SUNKEN)
         else:
-            button.config(text=str(value))
+            button.config(text=str(value), relief=SUNKEN)
 
         button.config(state=DISABLED)
         
