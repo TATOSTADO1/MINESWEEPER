@@ -14,7 +14,7 @@ def main():
     num_mines = 15
 
     board = Board(rows, columns, num_mines)
-    Screen(rows, columns, on_cell_click, board)
+    Screen(rows, columns, board)
     
 if __name__ == "__main__":
     main()

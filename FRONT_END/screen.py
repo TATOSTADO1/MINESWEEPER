@@ -6,11 +6,10 @@ from tkinter import ttk
 from BACK_END.board import Board
 
 class Screen:
-    def __init__(self, rows, cols, cell_command, board=None):
+    def __init__(self, rows, cols, board=None):
         self.first_click = TRUE
         self.rows = rows
         self.cols = cols
-        self.cell_command = cell_command
         self.board = board
     
         # ---------------- VENTANA PRINCIPAL ----------------
@@ -131,11 +130,11 @@ class Screen:
     
     def flag_cell(self, r, c):
         button = self.buttons[r][c]
-    
+
         # No permitir marcar si ya está revelado
         if button['state'] == DISABLED:
             return
-    
+
         # Alternar bandera
         if button['text'] == "🚩":
             button.config(text="")
