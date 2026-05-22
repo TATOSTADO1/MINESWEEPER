@@ -235,3 +235,14 @@ class Screen:
             text="💣 GAME OVER 💣",
             font=("Arial", 20)
         ).pack(padx=20, pady=20)
+        
+    def show_win(self):
+        win = Toplevel(self.window)
+
+        win.title("YOU WIN!")
+
+        Label(
+            win,
+            text="🎉 YOU WIN! 🎉",
+            font=("Arial", 20)
+        ).pack(padx=20, pady=20)

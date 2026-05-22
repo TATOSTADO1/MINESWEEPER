@@ -9,6 +9,7 @@ class Game:
         self.rows = 10
         self.cols = 10
         self.mines = 20
+        self.revealed_mines = 0
 
         self.board = Board(
             self.rows,
@@ -84,6 +85,7 @@ class Game:
 
             value = self.board.grid[row][col]
             self.screen.reveal_cell(row, col, value)
+        self.all_cells_revealed()
 
 
     def right_click(self, r, c):
@@ -100,6 +102,8 @@ class Game:
            c,
            flagged
         )
+        self.all_cells_revealed()
+        
         
 # ===================================
 # RESTART
@@ -139,3 +143,10 @@ class Game:
             rows,
             cols
         )
+    
+    def all_cells_revealed(self):
+        for r in range(self.rows):
+            for c in range(self.cols):
+                if not self.board.revealed[r][c] and self.board.grid[r][c] != -1:
+                    return False
+        self.screen.show_win()

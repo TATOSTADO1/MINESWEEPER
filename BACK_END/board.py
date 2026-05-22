@@ -121,59 +121,59 @@ class Board:
     
 
     def count_adjacent_flags(self, r, c):
-    
+
         directions = [
             (-1, -1), (-1, 0), (-1, 1),
             (0, -1),           (0, 1),
             (1, -1),  (1, 0),  (1, 1)
         ]
-    
+
         count = 0
-    
+
         for dr, dc in directions:
-        
+
             nr = r + dr
             nc = c + dc
-    
+
             if 0 <= nr < self.rows and 0 <= nc < self.cols:
-            
+
                 if self.flagged[nr][nc]:
                     count += 1
-    
+
         return count
-    
-    
+
+
     def chord_reveal(self, r, c):
         """
         Devuelve (celdas_reveladas, hubo_mina).
         Se llama cuando se hace clic en una celda numerada ya revelada.
         """
-    
+
         directions = [
             (-1, -1), (-1, 0), (-1, 1),
             (0, -1),           (0, 1),
             (1, -1),  (1, 0),  (1, 1)
         ]
-    
+
         revealed_cells = []
         hit_mine = False
-    
+
         for dr, dc in directions:
-        
+
             nr = r + dr
             nc = c + dc
-    
+
             if 0 <= nr < self.rows and 0 <= nc < self.cols:
-            
+
                 if not self.flagged[nr][nc] and not self.revealed[nr][nc]:
-                
+
                     if self.grid[nr][nc] == -1:
                         hit_mine = True
                         revealed_cells.append((nr, nc))  # para mostrar la mina
-    
+
                     else:
                         revealed_cells.extend(self.reveal(nr, nc))
-    
+
         return revealed_cells, hit_mine
 
     # ==========================
