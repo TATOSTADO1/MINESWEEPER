@@ -8,6 +8,7 @@ class Screen:
         self,
         rows,
         cols,
+        mines,
 
         left_click,
         right_click,
@@ -18,6 +19,7 @@ class Screen:
 
         self.rows = rows
         self.cols = cols
+        self.mines = mines
 
         self.left_click = left_click
         self.right_click = right_click
@@ -100,6 +102,14 @@ class Screen:
         )
 
         self.difficulty_combo.current(0)
+        
+        self.flag_counter = Label(
+            top_frame,
+            text=f"Flags: 0/{self.mines}",
+            bg="#8da193",
+            font=("Arial", 12) 
+        )
+        self.flag_counter.pack(side=LEFT, padx=10)
 
     # =========================
     # DIFFICULTY
@@ -246,3 +256,6 @@ class Screen:
             text="🎉 YOU WIN! 🎉",
             font=("Arial", 20)
         ).pack(padx=20, pady=20)
+        
+    def update_flag_counter(self, flagged_count, total_mines):
+        self.flag_counter.config(text=f"Flags: {flagged_count}/{total_mines}")

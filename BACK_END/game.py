@@ -20,6 +20,7 @@ class Game:
         self.screen = Screen(
             self.rows,
             self.cols,
+            self.mines,
 
             left_click=self.left_click,
             right_click=self.right_click,
@@ -103,6 +104,7 @@ class Game:
            flagged
         )
         self.all_cells_revealed()
+        self.update_flag_counter()
         
         
 # ===================================
@@ -150,3 +152,11 @@ class Game:
                 if not self.board.revealed[r][c] and self.board.grid[r][c] != -1:
                     return False
         self.screen.show_win()
+        
+    def update_flag_counter(self):
+        flagged_count = sum(
+            self.board.flagged[r][c]
+            for r in range(self.rows)
+            for c in range(self.cols)
+        )
+        self.screen.update_flag_counter(flagged_count, self.mines)  
