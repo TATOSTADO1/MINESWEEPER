@@ -50,6 +50,7 @@ class Screen:
         self.window.iconphoto(True, icon)
 
         self.create_top_buttons()
+        self.create_timer()
         self.create_matrix()
 
     # =========================
@@ -269,3 +270,15 @@ class Screen:
         
     def update_flag_counter(self, flagged_count, total_mines):
         self.flag_counter.config(text=f"Flags: {flagged_count}/{total_mines}")
+        
+    def create_timer(self):
+        self.timer_label = Label(
+            self.root_frame,
+            text="Tiempo: 0",
+            bg="#8da193",
+            font=("Arial", 12)
+        )
+        self.timer_label.pack(pady=5)
+
+    def update_timer(self, seconds):
+        self.timer_label.config(text=f"Tiempo: {seconds}")
