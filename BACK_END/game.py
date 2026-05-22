@@ -118,7 +118,7 @@ class Game:
             self.cols,
             self.mines
         )
-
+        self.update_flag_counter()
         self.screen.reset_board()
 
 # ===================================
@@ -145,6 +145,8 @@ class Game:
             rows,
             cols
         )
+        
+        self.update_flag_counter()
     
     def all_cells_revealed(self):
         for r in range(self.rows):

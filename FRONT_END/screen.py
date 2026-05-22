@@ -1,6 +1,16 @@
 from tkinter import *
 from tkinter import ttk
+import os
+import sys
 
+def resource_path(relative_path):
+
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class Screen:
 
@@ -36,7 +46,7 @@ class Screen:
         self.root_frame = Frame(self.window, bg="#8da193")
         self.root_frame.pack()
         
-        icon = PhotoImage(file="FRONT_END/LOGO.png")
+        icon = PhotoImage(file=resource_path("FRONT_END/LOGO.png"))
         self.window.iconphoto(True, icon)
 
         self.create_top_buttons()
