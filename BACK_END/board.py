@@ -199,3 +199,5 @@ class Board:
 
         elif difficulty == "Difícil":
             return 20, 20, 80
+        elif difficulty == "Personalizado":
+            return 0, 0, 0

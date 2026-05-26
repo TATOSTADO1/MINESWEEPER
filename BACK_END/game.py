@@ -22,7 +22,8 @@ class Game:
             left_click=self.left_click,
             right_click=self.right_click,
             restart_callback=self.restart,
-            difficulty_callback=self.change_difficulty
+            difficulty_callback=self.change_difficulty,
+            personalized_callback=self.personalized_settings,
         )
 
         self.screen.run()
@@ -135,7 +136,23 @@ class Game:
     def change_difficulty(self, difficulty):
 
         rows, cols, mines = Board.get_difficulty_config(difficulty)
+        
+        if (rows, cols, mines) == (0, 0, 0):
+            self.screen.window_personalized()
+        
+        self.rows = rows
+        self.cols = cols
+        self.mines = mines
 
+        self.stop_timer()
+        self.seconds = 0
+        self.screen.update_timer(0)
+
+        self.board = Board(rows, cols, mines)
+        self.screen.rebuild_board(rows, cols)
+        self.update_flag_counter()
+    
+    def personalized_settings(self, rows, cols, mines):
         self.rows = rows
         self.cols = cols
         self.mines = mines

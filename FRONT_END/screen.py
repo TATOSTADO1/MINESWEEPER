@@ -24,7 +24,8 @@ class Screen:
         right_click,
 
         restart_callback,
-        difficulty_callback
+        difficulty_callback,
+        personalized_callback
     ):
 
         self.rows = rows
@@ -36,6 +37,7 @@ class Screen:
 
         self.restart_callback = restart_callback
         self.difficulty_callback = difficulty_callback
+        self.personalized_callback = personalized_callback
 
         self.window = Tk()
         self.window.title("MINESWEEPER")
@@ -107,7 +109,7 @@ class Screen:
 
         self.difficulty_combo = ttk.Combobox(
             top_frame,
-            values=["Fácil", "Medio", "Difícil"],
+            values=["Fácil", "Medio", "Difícil", "Personalizado"],
             state="readonly",
             width=10
         )
@@ -282,3 +284,41 @@ class Screen:
 
     def update_timer(self, seconds):
         self.timer_label.config(text=f"Tiempo: {seconds}")
+    
+    def window_personalized(self):
+        personalized_window = Toplevel(self.window)
+        personalized_window.title("Personalizado")
+
+        Label(personalized_window, text="Filas:").grid(row=0, column=0, padx=5, pady=5)
+        rows_entry = Entry(personalized_window)
+        rows_entry.grid(row=0, column=1, padx=5, pady=5)
+
+        Label(personalized_window, text="Columnas:").grid(row=1, column=0, padx=5, pady=5)
+        cols_entry = Entry(personalized_window)
+        cols_entry.grid(row=1, column=1, padx=5, pady=5)
+
+        Label(personalized_window, text="Minas:").grid(row=2, column=0, padx=5, pady=5)
+        mines_entry = Entry(personalized_window)
+        mines_entry.grid(row=2, column=1, padx=5, pady=5)
+        
+        submit_btn = Button(personalized_window, text="Submit",command=lambda: self.submit_personalized(
+            rows_entry,
+            cols_entry,
+            mines_entry,
+            personalized_window
+        ))
+        submit_btn.grid(row=3, column=0, columnspan=2, pady=10)
+    
+    def submit_personalized(self, rows_entry, cols_entry, mines_entry, window):
+
+        rows = int(rows_entry.get())
+        cols = int(cols_entry.get())
+        mines = int(mines_entry.get())
+
+        self.personalized_callback(
+            rows,
+            cols,
+            mines
+        )
+
+        window.destroy()
